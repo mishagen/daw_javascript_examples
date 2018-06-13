@@ -1,0 +1,38 @@
+
+<html>
+
+<!-- 6.- Realizar un programa en JavaScript que muestre por pantalla los n primeros
+elementos de la secuencia de Fibonacci, se le pedirán al usuario con un
+prompt():
+Fibonacci: 1 1 2 3 5 8 13 21..... -->
+	<head>
+			<title>EJERCICIO 6 - BLOQUE2 JAVASCRIPT</title>
+			<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+
+		var suma = 0;
+		var b = 1;
+		var a = 0;
+
+
+		var num = prompt ("dame num");
+			num = parseInt(num);
+			alert (num);
+		
+
+			document.write("FIBONACI DE "+num+": | ");
+			while (suma<=num){
+
+			a=b; 
+			b=suma;
+			suma=a+b;
+			document.write(suma+" | ");
+		}
+
+		
+		
+		</script>
+	</body>
+</html>

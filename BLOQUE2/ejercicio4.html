@@ -1,0 +1,30 @@
+
+<html>
+
+<!-- 4.- Pide una hora (número entero entre 0 y 23). Si está entre 0 y 12 muestra
+“Buenos días”, en caso contrario “Buenas tardes”. Utiliza el operador ? -->
+	<head>
+			<title>EJERCICIO 4 - BLOQUE2 JAVASCRIPT</title>
+			<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+
+		do {
+			var hora = prompt("¿Qué hora tienes?"); // pedimos dato
+			var planeta = true;
+			if (hora>=0 && hora<=23){
+
+				var saludo = (hora<12)? "buenos días":"buenas tardes"; // operador ternacio (condicion)?valor true: valor false;
+				alert(saludo);
+				planeta=true;
+			} else {
+				alert("¿En qué planeta vives? El día tiene 24 horas en la Tierra")
+				planeta=false;
+			}
+
+		} while (isNaN(hora)==true || planeta!=true); 	
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+
+<html>
+
+<!-- 12.-Realiza un script que pida número de filas y columnas y escriba una tabla.
+Dentro cada una de las celdas deberá escribirse un número consecutivo en
+orden descendente. Si, por ejemplo, la tabla es de 7x5 los números irán del 35 al 1.-->
+	<head>
+			<title>EJERCICIO 12 - BLOQUE2 JAVASCRIPT</title>
+			<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+
+		var num;
+		
+		var row = prompt ("indica numero de filas: ");//Dynamic number for rows	
+        var col = prompt ("indica numero de columnas: "); // Dynamic number for columns
+
+        	row= parseInt(row);
+        	col= parseInt(col);
+        	num = row*col;
+
+
+                    document.write ("<table border='1' cellpadding='5'>");
+		   for(var i=0;i<row;i++){
+		      		document.write ( "<tr>");
+		      for(var j=0; j<col;j++){
+		        	document.write ( "<td>");
+		            document.write (num);
+		            num--;
+		            document.write ( "</td>");
+		      }
+		           document.write ("</tr>");
+		  }
+		           document.write ("</table>");
+		           document.write ("<hr>");
+		           document.write ('<br>');
+		</script>
+	</body>
+</html>

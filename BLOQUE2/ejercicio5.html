@@ -1,0 +1,48 @@
+
+<html>
+
+<!-- 5.- Pide una nota (número). Muestra su nota en modo texto (Muy deficiente,
+insuficiente, suficiente, bien, notable, sobresaliente). -->
+	<head>
+			<title>EJERCICIO 5 - BLOQUE2 JAVASCRIPT</title>
+			<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+
+		do {
+			var nota = prompt("Indica tu nota:"); // pedimos dato
+			var valida = true;
+			if (nota>=0 && nota<=10){
+				nota=parseInt(nota);
+				valida = true;
+				switch (nota) {
+
+					case 5:
+						alert("SUFICIENTE");
+						break;
+					case 6:
+						alert("BIEN");
+						break;
+					case 7:
+					case 8:
+					case 9:
+						alert("NOTABLE");
+						break;
+					case 10:
+						alert("SOBRESALIENTE");
+						break;	
+					default:
+						alert("INSUFICIENTE");
+						break;	
+				}
+			} else {
+				alert("Indica una nota real")
+				valido=false;
+			}
+
+		} while (isNaN(nota)==true || valida!=true); 	
+		
+		</script>
+	</body>
+</html>

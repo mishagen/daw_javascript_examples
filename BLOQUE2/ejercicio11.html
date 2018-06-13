@@ -1,0 +1,42 @@
+
+<html>
+
+<!-- 11.- Realizar un programa que nos muestre por pantalla los 5 últimos números 
+de entre dos dados(Se inicializarán dos variables).-->
+	<head>
+			<title>EJERCICIO 11 - BLOQUE2 JAVASCRIPT</title>
+			<meta charset="UTF-8">
+	</head>
+	<body>
+		<script type="text/javascript">
+		
+		var x; var y; var aux;
+
+		
+		x = prompt ("indica numero inicial");
+		y = prompt ("indica numero final");
+		x = parseInt(x);
+		y = parseInt(y);
+
+		if(x>y){
+			alert ("el numero inicial debe ser menor que el final");
+		}else{
+			
+			aux=y-5;
+
+			while ( y>(x+1) && y!=aux){
+				y--;
+				document.write(y+"|");
+
+			} 
+
+		}
+			
+	
+		
+
+
+
+		</script>
+	</body>
+</html>

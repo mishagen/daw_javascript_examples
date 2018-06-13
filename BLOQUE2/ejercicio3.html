@@ -1,0 +1,39 @@
+
+<html>
+
+<!-- 3.- Pide la edad. Si es mayor de 18 años indica que ya puede votar.
+Comprueba que está en el rango entre 1 y 150 años. Si no es así muestra un
+mensaje indicándolo-->
+	<head>
+			<title>EJERCICIO 2 - BLOQUE2 JAVASCRIPT</title>
+	</head>
+	<body>
+		<script>
+
+		do {
+			var edad = prompt("Indica tu edad"); // pedimos dato
+			
+
+				if(edad != null){
+		 
+						if (isNaN(edad)!=true && edad>0){ // usamos isNaN para verificar que introducimos algún.
+							
+							if (edad <18 || edad >150) {
+								alert ("No puedes votar");
+							} else { 
+								alert ("Puedes votar"); 
+							}
+	
+						} else {			// Si resulta NaN (vacio), entonces... 
+							alert ("tienes que un valor válido");
+						}
+				 } else {		// Si resulta NaN (vacio), entonces... 
+				 				alert ("Operacion abortada");
+								break;
+								}
+
+		} while (isNaN(edad)==true); 
+
+		</script>
+	</body>
+</html>

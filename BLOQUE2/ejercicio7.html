@@ -1,0 +1,37 @@
+
+<html>
+
+<!-- 7.- En este ejemplo vamos a declarar una variable e inicializarla a 0. Luego 
+iremos sumando a esa variable un número aleatorio del 1 al 100 hasta que 
+sumemos 1.000 o más, imprimiendo el valor de la variable suma después de 
+cada operación.  
+Usar-> Math.floor(Math.random() * 100);                          -->
+	<head>
+			<title>EJERCICIO 7 - BLOQUE2 JAVASCRIPT</title>
+			<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+
+		var num = 0;
+		
+		do {
+			var aux = Math.floor(Math.random() * 100); 
+				aux = parseInt(aux);
+			    num = num + aux;
+
+			    	document.write("RESULTADO ES: "+ num+"<br>");
+
+
+
+		} while (num<1000);
+
+		// document.write("RESULTADO ES: "+ num);
+
+
+	
+		
+		
+		</script>
+	</body>
+</html>
