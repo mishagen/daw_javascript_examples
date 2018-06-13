@@ -1,0 +1,31 @@
+
+div.row{
+	margin: auto;
+}
+
+#box1{
+	width: 300px;height: 300px; text-align: center; display: flex; justify-content: center;align-items: center;
+	background-color:lavender;
+}
+
+
+
+
+#box2{
+	width: 300px;height: 300px; text-align: center; display: flex; justify-content: center;align-items: center;
+	background-color:lavenderblush;
+}
+
+#msg1{
+	width: 300px;height: 150px; text-align: center;padding: 5px; margin-top:5px;
+	background-color:#00FFCC;
+}
+
+#msg2{
+	width: 300px;height: 150px; text-align: center;padding: 5px; margin-top:5px;
+	background-color:#00AACC;
+}
+
+#msg1>p:first-child, #msg2>p:first-child {
+	font-size: xx-large;
+}
