@@ -1,0 +1,24 @@
+$bkg:     #1a1a1a;
+$cBkg:    #262626;
+$pTxt:    #d5ff80;
+$hTxt:    #88cc00;
+
+body {
+    background-color: $bkg;
+    color: $pTxt;
+}
+
+canvas {
+    background-color: $cBkg;
+    border: 1px solid;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin:auto
+}
+
+.wrapper {
+    width: 100%;
+}
