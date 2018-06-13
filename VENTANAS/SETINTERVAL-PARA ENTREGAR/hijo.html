@@ -1,0 +1,64 @@
+<html>
+<!-- fichero viene de serinterval.html ver. enunciado ejercicio "Exercicio: Comunicación entre xanelas."   -->
+
+	<head>
+			<title>EJERCICIO setInterval y clearInterval </title>
+			<meta charset="UTF-8">
+		<script type="text/javascript" >
+		// Declaracion de variables  --------------------------------
+				var myWidth = window.innerWidth; // ancho
+				var myHeight = window.innerHeight; // altura
+		// Fin declaracion de variables  ----------------------------
+
+
+		// Funciones -------------------------------------------------
+
+		function start(){ // funcion que inicializa las funciones que necesitaremos
+			check_dimensions();
+			show_dimensions();
+
+		}
+
+		function get(){ // get captura las dimensiones actuales de ventana hija y comprueba que es multiplo de 100 mostrando mensaje.
+				myWidth = window.innerWidth; // ancho
+				myHeight = window.innerHeight; // altura
+				
+				if (myWidth%100==0){ // deberia ser si es múltiplo de 100 pero como va tan rápido lo definimos como multiplo  de 2 para que funcione. 
+    			
+    			window.opener.document.getElementById('mensaje').innerHTML = ' ancho multiplo de 100 en ' + myWidth +' x ' +myHeight; // muestra mensaje en html ventana padre.
+    			window.opener.alert('multiplo de 100 en: ' + myWidth +'x'+ myHeight ); 	// muestra alerta en ventana padre.
+    				} else {
+    			window.opener.document.getElementById('mensaje').innerHTML = '' ; // no muestra nada. 
+    			}
+		}
+
+		function show(){ // show muestra en ventana hijo y padre. las dimensiones de ventana hija. 
+			document.getElementById('resultado').innerHTML ="Dimensiones ("+ myWidth +"px ancho)  ("+ myHeight +"px alto)";  
+    		window.opener.document.getElementById('info').innerHTML = "El ancho de la pagina es de <span id='x'>"+ myWidth +"</span>px y el alto es de "+ myHeight +"px"; 
+		}
+
+		function check_dimensions(){  //funcion invoca funcion get cada diez ms.
+			setInterval(get,10);
+		}
+			    
+		function show_dimensions(){  // funcion invoca funcion get cada 500 ms.
+			setInterval(show,500);
+		}
+	
+		// FIN Funciones --------------------------------------------
+		</script> 
+
+		<style>
+			
+		#resultado {color:white;font-weight: bold; font-size:15; font-family:monospace;}
+
+		</style>
+
+    
+    </head>
+			
+
+	<body bgcolor="black" onload="start();">
+	<p id="resultado"></p>
+	</body>
+</html>

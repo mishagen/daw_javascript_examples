@@ -1,0 +1,86 @@
+<html>
+<!-- crear funcion que al pulsar un botón detecte la resolucion de pantalla y habra una venta que ocupe el 75% del largo de pantalla. la ventana emergente irá cerrando su tamaño a razón de 200px/s
+
+setInterval(funcion,tiempo), clearInterval ();   -->
+
+	<head>
+			<title>EJERCICIO setInterval y clearInterval </title>
+			<meta charset="UTF-8">
+			<script type="text/javascript" > 
+				var width = screen.availWidth*0.75; 
+			    var height = screen.height;
+			    var intervalo;
+			    var mywindow;
+
+			    // emergente = window.open("setinterval2.html", "anuncio","width="+width+", height="+height);
+
+				function _interval(){
+					
+					 intervalo = setInterval(_resize,0.2);	
+					//intervalo = setInterval(_resize(mywindow),3000);	
+					
+				}
+
+				function _intervalstop(){
+					clearInterval(intervalo);
+						mywindow.close();
+						alert("fin de programa");
+				}
+
+				function _emergente(){
+					// alert ("hola");
+					// document.write(screen.availWidth);
+					//  width = width-100;
+					 // alert(width);
+					 // document.write(screen.width + " x " + screen.height);
+					 mywindow = window.open('setinterval2.html','ventana1','width='+(width)+',height='+(height)+',left=0,top=0,toolbar=no');
+					
+
+					_interval(mywindow);
+				}
+
+				function _resize(){
+
+					width = width-1;
+					// mywindow.alert("sd");
+					if (width>200){
+					mywindow.resizeTo(width, height);
+					mywindow.moveTo(((screen.width - width) / 2), ((screen.height - height) / 2)); 
+
+					} else {
+						_intervalstop();
+						
+					}
+				}
+
+				function arrastrar( )
+					{
+					width = width-200;
+					emergente.moveTo(width, 100);
+					emergente.resizeTo(800, 600);
+					emergente.focus( );
+					}			
+
+		</script> 
+
+    
+    </head>
+			
+
+	<body>
+
+        <div align="center">
+            
+             <button onclick="_emergente()">PULSAR</button> 
+             <br>
+             <p id="info"></p>
+             <br>
+             <p id="mensaje" style="color:red; font-size: bold"></p>
+           
+        </div>
+        
+        
+        
+        
+	</body>
+</html>

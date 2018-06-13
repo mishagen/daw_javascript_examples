@@ -1,0 +1,40 @@
+<html>
+<!-- crear funcion que al pulsar un botón detecte la resolucion de pantalla y habra dos ventanas emergentes ocupando partes iguales de la misma. la ventana 1. realiza cambios sobre la ventana2. y al contrario usando window.opener();  -->
+
+	<head>
+			<title>EJERCICIO CLASES</title>
+			<meta charset="UTF-8">
+		<script type="text/javascript" > 
+
+		
+
+		function _emergente(){
+			// Open a new window
+			var myWindow = window.open("", "myWindow", "width=200, height=100");
+
+			// Write some text in the new window
+			myWindow.document.write("<p>This is 'myWindow'</p>");     
+
+			// Write some text in the window that created the new window            
+			myWindow.opener.document.write("<p>This is the source window!</p>"); 
+		}
+
+		</script> 
+
+    
+    </head>
+			
+
+	<body>
+
+        <div align="center">
+            
+            <button onclick="_emergente()">PULSAR</button>
+           
+        </div>
+        
+        
+        
+        
+	</body>
+</html>

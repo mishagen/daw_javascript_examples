@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>VENTANA-padre</title>
+ <script type="text/javascript">
+ 
+ function abrirHijo() { // funcion abrir ventana hijo.
+ window.document.getElementById('val2').value;  // CAPTURA LA VARIABLE CONTENIDA EN HTML ID VAL2
+ window.open('ventana2.html', 'popupId', 'location=no,menubar=no,titlebar=no,resizable=no,toolbar=no, menubar=no,width=500,height=500');  // ABRE VENTANA HIJO
+
+ }
+ 
+ </script>
+ </head>
+ <body>
+ <h1 id="text">Comunicación entre dos páginas con Javascript.</h1><br>Escribe nombre de padre<input type="text" id="val2" />  
+ <button onclick="abrirHijo();">Abrir Página Hijo.</button>
+ <p id="deHijo"></p> <!-- id donde insertaremos el texto que enviaremos desde el hijo. -->
+ </body>
+</html>

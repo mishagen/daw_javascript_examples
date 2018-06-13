@@ -1,0 +1,81 @@
+<html>
+<!-- Exercicio: Comunicación entre xanelas.
+ 1. Codifique un script que se execute ó picar nun botón dunha páxina e realice as seguintes
+operacións:
+ a) Abra unha nova fiestra que teña de longo o 75% do longo máximo representable na
+pantalla.
+ b) Unha vez aberta, faga que o seu longo diminúa a un ritmo de 200px/s (dando unha
+sensación de movemento contínuo, sen saltos) ata que sexa menor ou igual a 200px.
+ c) Ó acadar ese límite o script deberá pechar a fiestra que creou.
+ 2. Modifique o necesario para que na fiestra que abre o script amose cada medio segundo
+información sobre as súas dimensións.
+ 3. Modifique o necesario para que a fiestra que se abre presente na fiestra nai unha mensaxe
+cada vez que a súa dimensión horizontal pase por un valor que sexa múltiplo de 100px.  -->
+
+	<head>
+			<title>EJERCICIO setInterval y clearInterval </title>
+			<meta charset="UTF-8">
+			<script type="text/javascript" > 
+			// DECLARACION DE VARIABLES----------------------------------
+				var width = screen.availWidth*0.75; 
+			    var height = screen.height;
+			    var intervalo;
+			    var mywindow;
+			// FIN DECLARACION DE VARIABLES-------------------------------    
+			    
+			// Funciones -------------------------------------------------
+				function _interval(){ // funcion intervalo. Llama a funcion _resize cada 10 milisegundos.
+					
+					 intervalo = setInterval(_resize,10); // nota: igualamos setInterval con una variable/objeto. Nos servirá para poder matar el proceso más fácilmente. ;)	
+						
+					
+				}
+
+				function _intervalstop(){         // funcion para parar la función interval. 
+						clearInterval(intervalo); // matamos intervalo
+						mywindow.close();         // cerramos ventana mywindow
+						// alert("fin de programa"); // mostramos aviso indicando fin de programa. 
+				}
+
+				function _emergente(){ 			// funcion abre ventana emergente tomando los valores definidos en variables locales.
+					 mywindow = window.open('hijo.html','ventana1','width='+(width)+',height='+(height)+',left=0,top=0,toolbar=no'); // igualamos ventana creada a variable/objeto. ;)
+					_interval(); 				// llamada a función interval. 
+				}
+
+				function _resize(){ // funcion para cambiar tamaño de ventana activa. 
+
+					width = width-1; 	// reducimos valor variable ancho ventana en -1 px cada vez que se ejecute función. (recordemos que será cada 10ms). NOTA PODEMOS USAR objeto.resizeBy(ancho, alto);
+					if (width>200){ 	// si ancho es mayor que 200px... 
+					mywindow.resizeTo(width, height); // llamada a función tomando variables.
+					// mywindow.moveTo(((screen.width - width) / 2), ((screen.height - height) / 2));  // centrar la ventana emergente en pantalla ;)
+
+					} else { 
+						_intervalstop(); // matamos proceso ;)
+						
+					}
+				}
+
+				function mover( ){ 		// funcion mover. no la usaremos pero queda ahí como idea. 
+					
+					emergente.moveTo(width, 100);
+					emergente.resizeTo(800, 600);
+					emergente.focus( );
+				}			
+				// FIN Funciones --------------------------------------------
+		</script> 
+
+    
+    </head>
+	<body>
+
+        <div align="center">
+            
+             <button onclick="_emergente()">PULSAR</button> 
+             <br>
+             <p id="info"></p>
+             <br>
+             <p id="mensaje" style="color:red; font-size: bold"></p>
+           
+        </div>
+	</body>
+</html>

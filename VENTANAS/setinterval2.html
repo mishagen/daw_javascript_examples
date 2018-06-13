@@ -1,0 +1,96 @@
+<html>
+<!-- crear funcion que al pulsar un botón detecte la resolucion de pantalla y habra una venta que ocupe el 75% del largo de pantalla. la ventana emergente irá cerrando su tamaño a razón de 200px/s
+
+setInterval(funcion,tiempo), clearInterval ();   -->
+
+	<head>
+			<title>EJERCICIO setInterval y clearInterval </title>
+			<meta charset="UTF-8">
+		<script type="text/javascript" >
+		
+		function interval(){
+
+			setInterval(x,500);
+		}
+
+
+
+		function x(){
+				var myWidth = window.innerWidth; 
+				var myHeight = window.innerHeight;
+
+
+
+    	// window.alert( 'Width = ' + myWidth ); 
+        //  window.alert( 'Height = ' + myHeight );
+
+    	// document.getElementById('resultado').innerHTML ="El ancho de la pagina es de "+ myWidth +"px y el alto es de "+ myHeight +"px";  
+
+    	window.opener.document.getElementById('info').innerHTML = "El ancho de la pagina es de <span id='x'>"+ myWidth +"</span>px y el alto es de "+ myHeight +"px" ;  
+
+    		if (myWidth%2==0){
+    			
+    			// window.opener.focus();
+    			window.opener.alert('multiplo');
+    			window.opener.document.getElementById('mensaje').innerHTML = "multiplo";
+    		
+    		} else {
+    			window.opener.document.getElementById('mensaje').innerHTML = "";
+    		}
+
+
+		}
+		
+
+		//======================================
+				/*var width = 800; 
+			    var height = 600;
+			   	var intervalo;
+			   	var win;
+
+
+				function _resizepage(){
+					
+					 width = width -100;
+					 // var aux = width;
+
+					 if (width>200){
+					  document.write(width);
+                      window.resizeTo(width, height);
+    				  window.moveTo(((screen.width - width) / 2), ((screen.height - height) / 2)); 
+
+					// esta funcion es llamada por intervall hasta cumplir condicion de salida.	
+					} else {
+						_intervalstop();
+					}	
+				}
+
+				function _interval(){
+				
+					  intervalo=setInterval(_resizepage,3000);
+				} 
+
+				function _intervalstop(){
+						clearInterval(intervalo);
+						alert("hello");
+				}
+
+				_interval();
+				*/
+
+
+		</script> 
+
+    
+    </head>
+			
+
+	<body bgcolor="green" onload="interval();">
+	<script>
+		
+
+
+	</script>
+    
+	</body>
+</html>

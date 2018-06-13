@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>VENTANA-HIJO</title>
+ 
+ <script type="text/javascript">
+
+
+ function namehijo(){
+ 	 document.getElementById("dePadre").innerHTML =  window.opener.document.getElementById("val2").value; // imprime y captura en id "depadre" variable procedente de ventana padre.
+
+ }
+ 
+ function tofather() {
+ 
+ var dehijo = window.document.getElementById('val1').value; // captura variable contenida en html con id val1
+ window.opener.document.getElementById('deHijo').innerHTML = "Este texto viene de la página hijo: "+dehijo;  // esto escribe nombre de hijo
+ 
+ // this.window.close();
+ }
+ 
+ </script>
+ 
+ </head>
+ <body onload="namehijo();">
+ <h1 id="text">Ésta es la página hijo de <span id="dePadre"></span> lo que escriba en el input se mostrará en la página padre al cerrarla.</h1><br>Escribe nombre de hijo
+ <input type="text" id="val1" />  <button onclick="tofather();">Padre</button>
+ <div id="dialog1">
+ <p>TEXTO TEXTO TEXTO TEXTO</p>
+ </div>
+ </body>
+</html>

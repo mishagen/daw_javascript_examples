@@ -1,0 +1,33 @@
+<html>
+<!-- crear funcion que al pulsar un botón detecte la resolucion de pantalla y habra dos ventanas emergentes ocupando partes iguales de la misma.  -->
+
+	<head>
+			<title>EJERCICIO 20 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+		<script type="text/javascript" > 
+		function _emergente(){
+			document.write(screen.avalWidth);
+			// document.write(screen.width + " x " + screen.height);
+			window.open('http://google.com/','ventana1','width='+(screen.width/2)+',height='+(screen.height-100)+',left=0,top=0,toolbar=no');
+			window.open('http://yahoo.com/','ventana2','width='+(screen.width/2)+',height='+(screen.height-100)+',left='+(screen.width/2)+',top=0,toolbar=no');
+		}
+
+		</script> 
+
+    
+    </head>
+			
+
+	<body>
+
+        <div align="center">
+            
+            <button onclick="_emergente()">PULSAR</button>
+           
+        </div>
+        
+        
+        
+        
+	</body>
+</html>

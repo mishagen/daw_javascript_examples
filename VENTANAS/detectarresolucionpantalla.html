@@ -1,0 +1,28 @@
+<html>
+<!-- PROGRAMA DETECTA resolucion de pantalla.   -->
+
+	<head>
+			<title>EJERCICIO 18 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+	</head>
+			
+
+	<body>
+		<!-- script en body-->
+		<script type="text/javascript" >
+			var x=screen.width;
+			var y=screen.height;
+
+			document.write(x + " x " + y);
+			document.write('<br>');
+			var x2= parseInt((x/2));y2=parseInt((y/2));
+			document.write(x2 + " x " + y2);
+
+			window.open('http://www.google.es' , 'ventana1' , 'width=2x,height=screen.height,scrollbars=NO');
+			window.open('http://www.yahoo.es' , 'ventana2' , 'width=2x,height=screen.height,scrollbars=NO');
+		</script> 
+		<!-- fin script en body -->
+
+		
+	</body>
+</html>
