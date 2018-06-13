@@ -1,0 +1,7 @@
+*{font-family: arial;}
+body {background-color:#FFEFD5;}
+div{ border-style:solid; border-width:2px; margin:0px; background-color: #FFEFD5; text-align: center;}
+#cabeza{ padding:5px; border-color:blue; width:578px; height:100px; margin:0 auto;}
+#mensaxes{margin:0 auto; border-color:orange; width:780px;}
+#listaxe{height:25px; width:300px; padding:15px; background-color: #FFD0FF; margin:15px auto;}
+div#mensaxes table{margin:0 auto; }

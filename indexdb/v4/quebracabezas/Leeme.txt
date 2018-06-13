@@ -1,0 +1,12 @@
+* LEEME.TXT
+* IndexedDB: xogo
+* 				partida
+* ESTRUCTURA:  
+object = active.createObjectStore("partida", { keyPath : 'id', autoIncrement : true }); 
+object.createIndex('by_id', 'id', { unique : true }); 
+
+ALMACENA OBJETO CON LOS SIGUIENTES ATRIBUTOS (Campo/variable):  tempo: t_fin, // tiempo transcurrido en milisegundos
+                   							                    n_click: n_click, // numero de clicks realizados
+                    							                xogada: mapa // array con el orden de fichas presentes en tablero.
+                    							                
+		
