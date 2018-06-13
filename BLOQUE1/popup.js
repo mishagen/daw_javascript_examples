@@ -1,0 +1,1 @@
+window.open("http://www.google.es" , "ventana1" , "width=800,height=600,scrollbars=NO") 
