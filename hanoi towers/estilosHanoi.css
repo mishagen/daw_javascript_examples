@@ -1,0 +1,13 @@
+*{font-family: arial;}
+body {background-color:#FFEFD5;}
+div{ border-style:solid; border-width:2px; margin:0px; background-color: #FFEFD5; text-align: center;}
+#cabeza{ position: absolute; top: 10px; left: 100px; padding:15px; border-color:blue; width:578px; height:30px;}
+#torre1{position: absolute; top: 90px; left: 100px; margin:0px; border-color:blue; width:200px; height: 300px;}
+#torre2{position: absolute; top: 90px; left: 304px; margin:0px; border-color:blue; width:200px; height: 300px;}
+#torre3{position: absolute; top: 90px; left: 508px; margin:0px; border-color:blue; width:200px; height: 300px;}
+#mensaxes{position: absolute; top: 400px; left: 10px; margin:0px; border-color:orange; width:780px; height:55px;}
+#controles{position: absolute; top: 450px; left: 10px; margin:0px; border-color:orange; width:780px; height:25px;}
+.titulo {border-width:0px; height:20px; padding:5px; background-color: #FFD0FF;}
+.recheo { width:200px; border-width:0px;}
+.ficha { height:30px; background-color:brown; margin:0 auto;} 
+
