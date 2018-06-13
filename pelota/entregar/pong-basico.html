@@ -1,0 +1,331 @@
+<!-- Ejercicio. Crear un programa en js que emule una versión básica de pong -->
+
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>Versión basica Pong</title>
+    <style type="text/css">
+    
+	
+		#box{
+                    background: black;
+					position:relative;
+		            width:400px;
+		            height:450px;
+		            border:1px solid gray;
+		            
+		            overflow: hidden;
+		        }	
+						
+    </style>
+    <script type="text/javascript">
+// --------------------------------------------------------------
+// pong 0.5
+//
+//   Autor:     Miguel Parada Vázquez
+//   Ult. Mod.: 2016/12/17
+//
+// --------------------------------------------------------------
+// <gpl>
+//
+// Copyright (C) 2016  Miguel Parada Vázquez
+
+// Este programa es software libre; puede distribuirlo y/o
+// modificarlo bajo los terminos de la Licencia Publica General
+// GNU tal como ha sido publicada por la Fundacion para el
+// Software Libre; ya sea la version 2 de la Licencia, o (a su
+// conveniencia) cualquier version posterior.
+// 
+// Este programa es distribuido con la esperanza de ser util, pero
+// SIN GARANTIA ALGUNA; sin siquiera la garantia implicita de
+// COMERCIALIZACION o de APTITUD PARA UN PROPOSITO ESPECIFICO.
+// Consulte la Licencia Publica General GNU para mayores detalles.
+// 
+// Puede obtener una copia de la Licencia Publica General GNU
+// desde:
+//     http://www.gnu.org/copyleft/gpl.es.html
+//
+// ----
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
+// the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You can obtain a copy of the GNU General Public License from:
+//     http://www.gnu.org/copyleft/gpl.html
+// 
+// </gpl>
+// --------------------------------------------------------------
+
+
+
+var demo;
+var juego = false; 
+
+function init(){
+    demo = new tablero();
+    this.demo.dibuja();
+    
+}
+
+function jugar(){
+
+
+        if(juego==false){
+        play = setInterval(this.demo.mm,30);
+        juego=true;
+        }
+               
+}
+
+function ficha (ancho,color,y,x,vel){
+        var ancho=ancho; // ancho de la ficha. 
+        var altura=20;
+        var color=color;
+        var y=y; 
+        var x=x;
+        var velocidad=vel; 
+        this.getvelocidad=function(){return velocidad; };
+        this.getalto=function(){return altura;};
+        this.getancho=function(){return ancho;};
+        this.getcolor=function(){return color;};
+        this.getx=function(){return x;};
+        this.gety=function(){return y;};
+        this.sety=function(m){return y=m;};
+        this.setx=function(m){return x=m;};
+       
+}
+
+
+function figura(diametro,color,y,x,vel){ // constructor pelota
+		var diametro=diametro;
+		var color=color; 
+        var y=y; // valores posicion altura
+        var x=x; // valores posicion  distancia
+        var velocidad=vel; // constante velocidad
+        this.getdiametro = function(){ return diametro; };
+        this.getvelocidad=function(){return velocidad; };
+        this.getcolor = function(){ return color; };
+        this.getx=function(){ return x; };
+        this.gety=function(){ return y; };
+        this.setx = function(n){x=n; };
+        this.sety = function(n){y=n; };
+        var controlY=1;  
+        var controlX=2; 
+        this.getcontrolY=function(){ return controlY; };
+        this.getcontrolX=function(){ return controlX; };
+        this.setcontrolY = function(n){ controlY=n; };
+        this.setcontrolX = function(n){ controlX=n; };
+
+      
+      //  console.log('objeto pelota creado');
+      
+}
+
+function tablero() {
+
+   console.log('alta objeto pelota');
+    var pelota = new figura(20,"red",document.getElementById("box").offsetHeight/2,document.getElementById("box").offsetWidth/2,5);
+    var  pala1 = new ficha(100,"white",(document.getElementById("box").offsetWidth/2),(document.getElementById("box").offsetWidth/2)-50,15);
+    var pala2 = new ficha(100,"white",(document.getElementById("box").offsetHeight-20),(document.getElementById("box").offsetWidth/2)-50,15);
+    
+
+
+    //-----------------------------------------------------------------------------------------------------------------------
+
+    this.dibuja=function(){
+        //console.log('en this.dibuja');
+        
+        var out ='';
+
+        
+
+            var temp= '<div id="pelota" style="position:absolute;display:block; border-radius: 50%; width:'+ pelota.getdiametro()+'px; height:'+ pelota.getdiametro()+'px; background:'+ pelota.getcolor()+'; top:'+pelota.gety()+'px;left:'+pelota.getx()+'px;"></div>';
+                out=out.concat(temp);       
+        
+
+            var barra = '<div id="pong" style="position:absolute;display:block; width:'+pala1.getancho()+'px; height:'+pala1.getalto()+'px; background:'+pala1.getcolor()+'; top:0px;left:'+pala1.getx()+'px;"></div>';
+               out = out.concat(barra);
+
+                barra = '<div id="pong" style="position:absolute;display:block; width:'+pala2.getancho()+'px; height: '+pala2.getalto()+'px; background:'+pala2.getcolor()+'; top:'+pala2.gety()+'px;left:'+pala2.getx()+'px;"></div>';
+                out = out.concat(barra);
+
+             document.getElementById('box').innerHTML= out;
+            
+    };
+   
+    this.dibuja(); 
+     //-----------------------------------------------------------------------------------------------------------------------
+
+
+    this.mover=function(){
+         // var controlY,controlX;
+          this.hanColisionado(pelota,pala2);
+
+                //Eje Y
+                if(pelota.getcontrolY()==1){   // variable controla si movemos eje y o no.
+                pelota.sety(pelota.gety()+pelota.getvelocidad()); // sumamos a coordenada a Y
+                 // alert(pelota.y);
+               
+
+                
+                }else{  // 0   
+                      pelota.sety(pelota.gety()-pelota.getvelocidad()); // restamos a coordenada a Y
+                      
+                } 
+
+
+                /// colision en y?---------------------------------
+                if (pelota.gety()>=(document.getElementById("box").offsetHeight-(pelota.getdiametro()))) { // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la pelota deberiamos estar chocando. ;)
+ 
+                    pelota.setcontrolY(1);
+                    pelota.setcontrolX(2);
+                    // pelota.setcontrolX(0);
+                    pelota.sety(document.getElementById("box").offsetHeight/2);
+                    pelota.setx(document.getElementById("box").offsetWidth/2);
+                }
+
+
+                if (pelota.gety()-pelota.getdiametro()/2<pala1.getalto()) { // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la pelota deberiamos estar chocando. ;)
+ 
+                    pelota.setcontrolY(1);
+                    //alert(pelota.getcontrolX());
+                    pelota.getcontrolX()==0 ? pelota.setcontrolX(0):pelota.setcontrolX(1);
+                    //  alert(pelota.getcontrolX());
+                    // pelota.setcontrolX(0);
+                   
+
+                   
+
+                }
+
+
+                //Eje x
+
+                if(pelota.getcontrolX()==2){
+                    pelota.setx(document.getElementById("box").offsetWidth/2);
+
+                }
+
+
+                if(pelota.getcontrolX()==1){   // variable controla si movemos eje y o no.
+                   pelota.setx(pelota.getx()+pelota.getvelocidad()); // sumamos a coordenada y +1px
+                
+                }else{         
+                   pelota.setx(pelota.getx()-pelota.getvelocidad()); // restamos a coordenada y +1px
+                } 
+
+
+                 if( pelota.getx()<=0){        // si y es inverior o igual a 0
+                    pelota.setcontrolX(1);  // controly a 1
+                    pelota.setx(0);         // x=0
+
+                /// colision en x?---------------------------------
+                }else if(pelota.getx()>=document.getElementById("box").offsetWidth-(pelota.getdiametro())){ 
+ 
+                   pelota.setcontrolX(0);
+                   pelota.setx(document.getElementById("box").offsetWidth-(pelota.getdiametro()));
+                }
+
+                pala1.setx(pelota.getx()-pala1.getancho()/2);
+                
+
+               
+
+           
+         
+
+
+     // controles
+     // ---------------------------------------------------------------------------------------------------------------
+
+                var left=false;
+                var rigth=false;
+               
+                
+                
+                document.body.onkeydown=function(e){
+                     
+                                switch(e.keyCode)
+                                {
+                                    case 37: //izquierda
+                                        e.preventDefault();
+
+                                        left=true;
+
+                                        if(pala2.getx()>0){
+                                        pala2.setx(pala2.getx()-pala2.getvelocidad());
+                                        }
+                                        
+                                        break;
+                                    case 39: //derecha
+                                        e.preventDefault();
+                                        rigth=true;
+                                        if(pala2.getx()<document.getElementById("box").offsetWidth-pala2.getancho()){
+                                        pala2.setx(pala2.getx()+pala2.getvelocidad());
+                                        }
+                                       
+                                        break;
+                                   
+                                    
+                                }
+                };
+                document.body.onkeyup=function(e){
+                     //  console.log(e.keyCode); 
+                                switch(e.keyCode)
+                                {
+                                    case 37: //izquierda
+                                        e.preventDefault();
+                                        left=false;
+                                        break;
+                                    case 39: //derecha
+                                        e.preventDefault();
+                                        rigth=false;
+                                        break;
+                                      
+                                }
+                };
+    };
+
+
+    this.hanColisionado =function(pelota,pala2) {  
+    var colision=false;
+    
+
+           // comprobamos si pelota golpea en pala inferior
+
+            if (pelota.gety() + pelota.getvelocidad()+pelota.getdiametro()>= pala2.gety()) {
+
+                                 if(pelota.getx()+pelota.getdiametro() > pala2.getx() && pelota.getx() < (pala2.getx()+pala2.getancho()/2)){
+                                      
+                                        pelota.setcontrolX(0);
+                                        pelota.setcontrolY(0);
+                                         return;
+                                        }
+
+                                if(pelota.getx()+pelota.getdiametro()/2 > (pala2.getx()+pala2.getancho()/2) && pelota.getx() < (pala2.getx()+pala2.getancho())){
+                                        
+                                        pelota.setcontrolX(1);
+                                        pelota.setcontrolY(0);
+                                         return;
+                                        }
+            }
+    }
+
+    this.mm=function(){this.demo.mover(); this.demo.dibuja();};
+}
+    </script>
+</head>
+<body onload="init()">
+<button onclick="jugar()">Iniciar</button>
+usa teclas direccion para mover 
+<div id="box"></div>
+
+</body>

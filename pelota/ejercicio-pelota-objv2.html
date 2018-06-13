@@ -1,0 +1,326 @@
+<!-- Ejercicio. Crear un programa en js donde una pelota rebote dentro de los limites de un div.
+	La pelota debera tener atributos mensaje, posicion x/y, velocidad. Calculando su pos x = pos inicial x + valor*t-->
+
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>Mover bola en el eje Z con dentro de una caja JS</title>
+    <style type="text/css">
+    	
+		
+		#box{
+			position:relative;
+			
+		            width:100%;
+		            height:450px;
+		            border:1px solid gray;
+		            background-color: white;
+		            /* box-shadow:0px 0px 20px gray inset; */
+		            border-radius:20px;
+		            overflow: hidden;
+		        }	
+						
+    </style>
+    <script type="text/javascript">
+// --------------------------------------------------------------
+// PELOTA SALTARINA 
+//
+//   Autor:     Miguel Parada Vázquez
+//   Ult. Mod.: 2016/11/18
+//
+// --------------------------------------------------------------
+// <gpl>
+//
+// Copyright (C) 2016  Miguel Parada Vázquez
+
+// Este programa es software libre; puede distribuirlo y/o
+// modificarlo bajo los terminos de la Licencia Publica General
+// GNU tal como ha sido publicada por la Fundacion para el
+// Software Libre; ya sea la version 2 de la Licencia, o (a su
+// conveniencia) cualquier version posterior.
+// 
+// Este programa es distribuido con la esperanza de ser util, pero
+// SIN GARANTIA ALGUNA; sin siquiera la garantia implicita de
+// COMERCIALIZACION o de APTITUD PARA UN PROPOSITO ESPECIFICO.
+// Consulte la Licencia Publica General GNU para mayores detalles.
+// 
+// Puede obtener una copia de la Licencia Publica General GNU
+// desde:
+//     http://www.gnu.org/copyleft/gpl.es.html
+//
+// ----
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
+// the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You can obtain a copy of the GNU General Public License from:
+//     http://www.gnu.org/copyleft/gpl.html
+// 
+// </gpl>
+// --------------------------------------------------------------
+
+
+
+var demo; 
+var juego = false;
+var start;
+
+function iniciar(){
+        demo = new tablero();
+         if (juego!=true){
+            start = setInterval(this.demo.loop,30);
+            juego = true;
+        }
+        return;
+}
+
+function detener(){
+        clearInterval(start); // matamos intervalo
+        juego = false;
+}
+
+function continuar(){
+        
+         if (juego!=true){
+            start = setInterval(this.demo.loop,30);
+            juego = true;
+        }
+      
+}
+
+
+function figura(diametro,color,y,x,vel,controlY,controlX){ // constructor pelota
+        this.diametro=diametro;
+        this.color=color; 
+        this.y=y; // valores posicion altura
+        this.x=x; // valores posicion  distancia
+        this.velocidad=vel; // constante velocidad
+        this.getdiametro = function(){ return this.diametro; };
+        this.getvelocidad=function(){return this.velocidad; };
+        this.getcolor = function(){ return this.color; };
+        this.getx=function(){ return this.x; };
+        this.gety=function(){ return this.y; };
+        this.setx = function(n){this.x=n; };
+        this.sety = function(n){this.y=n; };
+        this.controlY=controlY;  
+        this.controlX=controlX; 
+        this.getcontrolY=function(){ return this.controlY; };
+        this.getcontrolX=function(){ return this.controlX; };
+        this.setcontrolY = function(n){this.controlY=n; };
+        this.setcontrolX = function(n){this.controlX=n; };
+      
+}
+
+function tablero(){
+    // declaramos objetos //
+    // objeto = (tamaño, color, y,x,velocidad,controly,controlx);
+    this.pelota1 = new figura(40,"brown",200,300,5,1,1);
+    this.pelota2 = new figura(40,"yellow",160,40,5,0,0);
+    this.pelota3 = new figura(40,"green",20,120,5,1,1);
+    this.pelota4 = new figura(40,"SLATEBLUE",100,40,5,1,0);
+    this.pelota5 = new figura(40,"blue",270,220,7,0,0);
+    this.pelota6 = new figura(40,"purple",270,20,5,0,1);
+    this.pelota7 = new figura(40,"pink",470,120,5,1,1);
+    this.pelota8= new figura(40,"red",0,220,5,0,1);
+    this.pelota9 = new figura(40,"black",17,300,5,0,1);
+    this.pelota10 = new figura(40,"orange",80,360,5,1,1);
+    
+    
+  
+    this.pelotas= [this.pelota1,this.pelota2,this.pelota3,this.pelota4,this.pelota5,this.pelota6,this.pelota7,this.pelota8,this.pelota9,this.pelota10];
+    this.totalpelotas=this.pelotas.length; // n
+
+    //-----------------------------------------------------------------------------------------------------------------------
+
+    this.dibuja=function(){
+     
+        
+        var out ='';
+
+        for(var x=0;x<this.totalpelotas;x++){
+
+            var temp= '<div id="pelota" style="position:absolute;display:block; border-radius: 50%; width:'+this.pelotas[x].getdiametro()+'px; height:'+ this.pelotas[x].getdiametro()+'px; background:'+ this.pelotas[x].getcolor()+'; top:'+this.pelotas[x].gety()+'px;left:'+this.pelotas[x].getx()+'px;"></div>';
+                out=out.concat(temp);       
+        }
+             document.getElementById('box').innerHTML= out;
+    };
+   
+    this.dibuja(); 
+     //-----------------------------------------------------------------------------------------------------------------------
+
+
+    this.mover=function(){
+
+         hanColisionado(this.pelotas);
+ 
+         for(var k=0;k<this.totalpelotas;k++){
+
+         	
+
+                //Eje Y
+                if(this.pelotas[k].getcontrolY()==1){   // variable controla si movemos eje y o no.
+                this.pelotas[k].sety(this.pelotas[k].gety()+this.pelotas[k].getvelocidad()); // sumamos a coordenada a Y (se desplaza hacia abajo (0,n))
+                 // alert(this.pelotas[k].y);
+               
+
+                
+                }else{         
+                      this.pelotas[k].sety(this.pelotas[k].gety()-this.pelotas[k].getvelocidad()); // restamos a coordenada a Y (se desplaza hacía arriba (n,0))
+                      
+                } 
+
+                 if(this.pelotas[k].gety()<=0){        // si y es inverior o igual a 0
+                    this.pelotas[k].setcontrolY(1);     // controly a 1
+                    this.pelotas[k].sety(0);            // y=0
+                    
+                }else if(this.pelotas[k].gety()>=(document.getElementById("box").offsetHeight-(this.pelotas[k].getdiametro()))){ // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la pelota deberiamos estar chocando. ;)
+ 
+                    this.pelotas[k].setcontrolY(0);
+                    this.pelotas[k].sety(document.getElementById("box").offsetHeight-(this.pelotas[k].getdiametro()));
+                }
+                       
+
+                //Eje x
+
+                if(this.pelotas[k].getcontrolX()==1){   // variable controla si movemos eje y o no.
+                   this.pelotas[k].setx(this.pelotas[k].getx()+this.pelotas[k].getvelocidad()); // sumamos a coordenada y +1px
+                
+                }else{         
+                   this.pelotas[k].setx(this.pelotas[k].getx()-this.pelotas[k].getvelocidad()); // restamos a coordenada y +1px
+                } 
+
+
+                 if( this.pelotas[k].getx()<=0){        // si y es inverior o igual a 0
+                    this.pelotas[k].setcontrolX(1);     // controly a 1
+                    this.pelotas[k].setx(0);                // x=0
+
+                }else if(this.pelotas[k].getx()>=document.getElementById("box").offsetWidth-(this.pelotas[k].getdiametro())){ 
+ 
+                   this.pelotas[k].setcontrolX(0);
+                   this.pelotas[k].setx(document.getElementById("box").offsetWidth-(this.pelotas[k].getdiametro()));
+                }
+         }  
+    };   
+    
+
+                this.loop=function(){ this.demo.mover(); this.demo.dibuja(); };
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+function hanColisionado(pelotas) {
+	this.pelotas=pelotas;
+	var k=0;
+	var m=0;
+	var colision=false;
+	
+
+
+	for(k=0; k<this.demo.totalpelotas;k++){
+		for(m=0; m<this.demo.totalpelotas;m++) {
+
+
+			
+        			if (m!=k){
+
+        				var dx = this.pelotas[k].getx()-this.pelotas[m].getx();
+				        var dy = this.pelotas[k].gety()-this.pelotas[m].gety();
+				        var distance = Math.sqrt((dx * dx) + (dy * dy)); // Teorema de Pitagoras
+				
+
+        				if((distance<=((this.pelotas[k].getdiametro()/2)+this.pelotas[m].getdiametro()/2))==true){
+        					var colision =true; 
+        					if(this.pelotas[k].gety()<this.pelotas[m].gety()) { // k está más arriba que m
+        						if (this.pelotas[k].getcontrolY()==0 && this.pelotas[m].getcontrolY()==0){ //ambos suben
+        							
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}
+        				
+        						if(this.pelotas[k].getcontrolY()==1 && this.pelotas[m].getcontrolY()==1){ //ambos bajan
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}	
+
+        						if(this.pelotas[k].getcontrolY()==1 && this.pelotas[m].getcontrolY()==0){ //k baja m sube
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}	
+
+        						if(this.pelotas[k].getcontrolY()==0 && this.pelotas[m].getcontrolY()==1){ //k sube m baja
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}	
+        					}
+
+        					if(this.pelotas[k].gety()>this.pelotas[m].gety()) { // m está por encima de k
+        						if (this.pelotas[k].getcontrolY()==0 && this.pelotas[m].getcontrolY()==0){ // ambos suben
+        							
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}
+        				
+        						if(this.pelotas[k].getcontrolY()==1 && this.pelotas[m].getcontrolY()==1){ // ambos bajan
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}	
+
+        						if(this.pelotas[k].getcontrolY()==1 && this.pelotas[m].getcontrolY()==0){ // k baja m sube
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}	
+
+        						if(this.pelotas[k].getcontrolY()==0 && this.pelotas[m].getcontrolY()==1){ // k sube m baja
+        							if (this.pelotas[k].getx()<=this.pelotas[m].getx()){
+        								this.pelotas[k].setcontrolX(0); this.pelotas[m].setcontrolX(1);
+        							} else {
+        								this.pelotas[k].setcontrolX(1); this.pelotas[m].setcontrolX(0);
+        							}
+        						}	
+        					}
+
+        				}	
+ 			
+        			}
+        		}
+	}   return;
+}
+
+</script>
+</head>
+<body>
+<button onclick="iniciar()">Iniciar</button><button onclick="detener()">Detener</button><button onclick="continuar()">Continuar</button>
+
+<div id="box"></div>
+
+</body>

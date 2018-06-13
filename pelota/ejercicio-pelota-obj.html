@@ -1,0 +1,251 @@
+<!-- Ejercicio. Crear un programa en js donde una pelota rebote dentro de los limites de un div.
+	La pelota debera tener atributos mensaje, posicion x/y, velocidad. Calculando su pos x = pos inicial x + valor*t-->
+
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>Mover bola en el eje Z con dentro de una caja JS</title>
+    <style type="text/css">
+    
+		#pelota {
+					position:relative;
+					display:block;
+            		/* width: 100px;
+				    height: 100px; */
+				    /* top:80%; */
+				    border-radius: 50%;
+				    /* background: red;		*/
+					}
+		#lienzo{
+					/* position:fixed; */
+		            width:100%;
+		            height:450px;
+		            border:1px solid gray;
+		            /* box-shadow:0px 0px 20px gray inset; */
+		            border-radius:20px;
+		            overflow: hidden;
+		        }	
+						
+    </style>
+    <script type="text/javascript">
+// --------------------------------------------------------------
+// PELOTA SALTARINA 0.1
+//
+//   Autor:     Miguel Parada Vázquez
+//   Ult. Mod.: 2016/11/18
+//
+// --------------------------------------------------------------
+// <gpl>
+//
+// Copyright (C) 2016  Miguel Parada Vázquez
+
+// Este programa es software libre; puede distribuirlo y/o
+// modificarlo bajo los terminos de la Licencia Publica General
+// GNU tal como ha sido publicada por la Fundacion para el
+// Software Libre; ya sea la version 2 de la Licencia, o (a su
+// conveniencia) cualquier version posterior.
+// 
+// Este programa es distribuido con la esperanza de ser util, pero
+// SIN GARANTIA ALGUNA; sin siquiera la garantia implicita de
+// COMERCIALIZACION o de APTITUD PARA UN PROPOSITO ESPECIFICO.
+// Consulte la Licencia Publica General GNU para mayores detalles.
+// 
+// Puede obtener una copia de la Licencia Publica General GNU
+// desde:
+//     http://www.gnu.org/copyleft/gpl.es.html
+//
+// ----
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
+// the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You can obtain a copy of the GNU General Public License from:
+//     http://www.gnu.org/copyleft/gpl.html
+// 
+// </gpl>
+// --------------------------------------------------------------
+
+
+ //Definimos las variables:
+       /*  var y=0;           
+        var x=0;
+        var controlY=false;  
+        var controlX=false;  
+        var velocidad=1;
+        var intervalo;
+        var juego = false; */
+			
+        /* var pelota1 = new figura(100,"red",0,0);
+        var pelota2 = new figura(40,"yellow",100,40);
+        var pelota3 = new figura(50,"green",200,20); */
+
+        /* var pelotas = [pelota1,pelota2,pelota3];
+        var lienzo = new tablero(pelotas); */
+
+console.log("iniciamos");
+
+var demo;
+
+iniciar();
+
+function iniciar(){
+        console.log("creando objeto tablero");
+        demo = new tablero();
+        console.log("creado objeto tablero");
+        return;
+}
+
+
+function figura(diametro,color,y,x,vel){ // constructor pelota
+		this.diametro=diametro;
+		this.color=color; 
+        this.y=y; // valores posicion altura
+        this.x=x; // valores posicion  distancia
+        this.getdiametro = function(){ return this.diametro; };
+        this.getcolor = function(){ return this.color; };
+        this.getx=function(){ return this.x; };
+        this.gety=function(){ return this.y; };
+        this.setx = function(x){this.x=x; return this.x;};
+        this.sety = function(y){this.y=y; return this.y;};
+        this.mover= function(){};
+        console.log('objeto pelota creado');
+      
+}
+
+function tablero(){
+  
+    var pelota1 = new figura(120,"red",0,0,1);
+    var pelota2 = new figura(40,"yellow",100,40,2);
+    var pelota3 = new figura(50,"green",200,20,5);
+
+
+    
+    this.pelotas= [pelota1,pelota2,pelota3];
+    this.totalpelotas=this.pelotas.length; //3
+   
+
+    this.dibuja=function(){
+     
+        
+        var out ='';
+        console.log(out);
+        for(var x=0;x<this.totalpelotas;x++){
+
+            var temp= '<div id="pelota" style="position:relative;display:block; border-radius: 50%; width:'+this.pelotas[x].getdiametro()+'px; height'+ this.pelotas[x].getdiametro()+'px; background:'+ this.pelotas[x].getcolor()+'; top:'+this.pelotas[x].gety()+'px;left:'+this.pelotas[x].getx()+'px;"></div>';
+                out=out.concat(temp);
+        }
+           
+            
+           // 
+
+    };
+   
+    this.dibuja(); 
+    pinta(out); 
+}
+
+
+function pinta(out){
+   document.getElementById(box).innerHTML= out;
+}
+
+
+
+console.log('final');
+
+/*  function _init (){ 
+    diametro=document.getElementById('diametro').value+"px";
+    color=document.getElementById('color').value;
+   
+    pelota = new figura(diametro,color,y,x); // 
+    lienzo = new tablero(pelota);
+
+    document.getElementById("pelota").style.width=pelota.diametro;
+    document.getElementById("pelota").style.height=pelota.diametro;
+    document.getElementById("pelota").style.background=pelota.color;
+    // console.log(pelota.getcolor);
+
+
+    if (juego!=true){
+    intervalo = setInterval(_mover,5);
+    juego = true;
+    }
+
+}
+
+
+
+function _mover(){ // funcion mover
+
+	if(juego==true){
+ 			//Eje Y
+            if(controlY==true){   // variable controla si movemos eje y o no.
+                y+=velocidad; // sumamos a coordenada y +1px
+            }else{         
+                y-=velocidad; // restamos a coordenada y +1px
+            }
+
+
+            if(y<=0){        // si y es inverior o igual a 0
+                controlY=true;  // controly a 1
+                y=0;         // y=0
+            }else if(y>=document.getElementById("lienzo").offsetHeight-(document.getElementById('diametro').value)){ // Esto significa si y es mayor o igual a la altura que tiene el lienzo menos el tamaño de la pelota deberiamos estar chocando. ;)
+ 
+                controlY=false;
+                y=document.getElementById("lienzo").offsetHeight-(document.getElementById('diametro').value);
+
+            }
+ 
+            //Eje X
+            if(controlX==true){ 
+                x+=velocidad;
+            }else{         
+                x-=velocidad;
+            }
+            if(x<=0){
+                 controlX=true;
+                x=0;
+
+            }else if(x>=document.getElementById("lienzo").offsetWidth-(document.getElementById('diametro').value)){ //llegamos al limite?
+                controlX=false;
+                x=document.getElementById("lienzo").offsetWidth-(document.getElementById('diametro').value);
+            }
+
+            figura.y=y; figura.x=x;
+
+
+            document.getElementById("pelota").style.left=figura.x+"px"; // 
+            document.getElementById("pelota").style.top=figura.y+"px";
+            console.log('posicion x'+figura.x+'/ y'+figura.y);
+        } else{
+    	y=0; x=0;
+    	velocidad=1;
+    }
+}
+
+function _detener(){ // funcion mover
+		clearInterval(intervalo); // matamos intervalo
+		juego = false;
+} */
+    </script>
+</head>
+<body>
+
+<div id="box"> 
+</div>
+
+
+</div>
+
+
+
+
+</body>
