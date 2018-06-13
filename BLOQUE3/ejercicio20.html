@@ -1,0 +1,124 @@
+<html>
+<!-- 20.- Haz un script que permita reservar butacas en un cine de 12 filas y 20 columnas.
+Necesitaremos preguntar al usuario fila y columna deseada, si no muestra preferencia, elegir
+un sitio aleatorio y asignárselo.
+La pantalla tendrá tres botones:
+- Nuevo Cliente → Pedirá fila y columna con un prompt().
+- Nuevo Cliente aleatorio -> Se informa de la fila y la columna asignada.
+- Dibujar Sala → Dibujará la sala en pantalla con las butacas ocupadas en rojo y las libres en
+verde.
+Cuando la sala esté llena debe dar un aviso. El aviso lo dará al hacer click sobre Nuevo Cliente.  -->
+
+	<head>
+			<title>EJERCICIO 20 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+		<script type="text/javascript" > 
+
+		var butacas = [
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],
+  ['L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L','L'],     
+];
+
+	var fila; var col;var aforo=240; var cont=0;
+
+		function _alea(max,min){
+			var valor = Math.floor((Math.random() * max) + min);
+			return valor;
+		}
+
+		function _aforo(aux){
+			if(cont==aforo){
+				alert("aforo completo");
+			
+
+				// break;
+			} else {alert('aforo: '+cont+'/'+aforo)}
+		}
+
+
+		function _newcliente(){
+			var aux =false;
+			_aforo();
+			while (aux!=true && cont!=aforo) {
+			fila = prompt ('elige fila');
+			col = prompt ('elige col');
+			if (butacas[fila-1][col-1]!='C'){
+				butacas[fila-1][col-1]='C';
+				cont++;
+				aux=true;
+				alert('butaca'+fila+'/'+col+'asignada');
+				}else{alert('butaca ocupada');
+			}
+			} 
+			
+
+		}
+
+
+		function _newclientealea(){
+			var aux =false;
+			 _aforo();
+			while (aux!=true && cont!=aforo) {
+			fila = _alea(12,1);
+			col =  _alea(20,1);
+			if (butacas[fila-1][col-1]!='C'){
+				butacas[fila-1][col-1]='C';
+				cont++;
+				aux=true;
+				alert('butaca'+fila+'/'+col+'asignada');
+				}
+			} 
+			
+		} 
+
+		function _dibujasala(){
+			lim_col =20;
+ 		 	lim_row =12;
+
+ 		 			document.write ('<table border="1" cellpadding="10">');
+			       
+			         for (var rol=1;rol<=lim_row;rol++){ // for para definir filas
+			         document.write ('<tr>');
+
+
+					for ( var col = 1; col <=lim_col; col++) { // for para definir columnas
+					if (butacas[rol-1][col-1]=='C'){
+						document.write ('<td bgcolor="red">'+rol+'/'+col+'/'+butacas[rol-1][col-1]+'</td>');		
+					}else {document.write ('<td bgcolor="green">'+rol+'/'+col+'/'+butacas[rol-1][col-1]+'</td>');		}
+										
+					} document.write('</tr>');
+					}  document.write('</table>');
+		}
+
+		
+
+		</script> 
+
+    
+    </head>
+			
+
+	<body>
+
+        <div align="center">
+            
+            <button onclick="_newcliente()">NUEVO CLIENTE</button>
+            <button onclick="_newclientealea()">NUEVO CLIENTE ALEATORIO</button>
+            <button onclick="_dibujasala()">DIBUJAR SALA</button>
+        </div>
+        
+        
+        
+        
+	</body>
+</html>

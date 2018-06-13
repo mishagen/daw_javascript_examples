@@ -1,0 +1,42 @@
+<html>
+<!--    -->
+
+	<head>
+			<title>EJERCICIO ORCACULO </title>
+			<meta charset="UTF-8">
+
+					<!-- script en body-->
+		<script type="text/javascript" > 
+
+		function _oraculo(){
+
+			var respuesta;
+			
+			var valor = Math.round(Math.random()*(4-1)+parseInt(1));
+			// Math.floor((Math.random() * max) + min);
+			switch (valor) {
+			case 1: respuesta = "Si";
+			break;
+			case 2: respuesta = "No";
+			break;
+			case 3: respuesta = "Es posible";
+			break;
+			case 4: respuesta = "No cuentes con ello";
+			break;
+			} document.f1.res.value = respuesta;
+		}
+		</script> 
+		<!-- fin script en body -->
+	</head>
+			
+
+	<body>
+
+
+
+		<FORM name=f1>HAZ TU PREGUNTA HUMANO: <INPUT maxLength=300 size=10 name=value> <BR><INPUT onclick=_oraculo() type=button value="oraculo"> 
+<BR><BR> <INPUT maxLength=15 size=15 name=res> 
+</FORM></BODY></HTML>
+
+	</body>
+</html>

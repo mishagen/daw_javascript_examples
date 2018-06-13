@@ -1,0 +1,73 @@
+<html>
+<!-- 16.- Pide una cadena por teclado. Crea un array que almacene cada una de las palabras de la 
+cadena introducida. Indica: 
+- Número de palabras. 
+- La primera y última palabra del array. 
+- Muestra el array ordenado de la a-z. 
+- Muestra el array ordenado de la z-a. 
+- Convierte todo el array a mayúsculas.  -->
+
+	<head>
+			<title>EJERCICIO 16 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+	</head>
+			
+
+	<body>
+		<!-- script en body-->
+		<script type="text/javascript" > 
+
+//---------------------------------------------------------
+function _split(input, array){
+	array = input.split(' ');
+	return array;
+
+}
+
+function _read(lista){
+	for (var x=0; x<lista.length;x++){
+	 	document.write(lista[x]);
+		// document.write("<br>"); 	 
+			}
+}
+
+
+
+
+function _uppercase(lista){
+	for (var x=0; x<lista.length;x++){
+	 	lista[x] = lista[x].toUpperCase(); 
+		}
+		return lista;
+}
+
+function _lowercase(lista){
+	for (var x=0; x<lista.length;x++){
+	 	lista[x] = lista[x].toLowerCase(); 
+		}
+		return lista;
+}
+
+
+// ------------------------------------------------------
+
+		var lista = new Array();
+
+		var input = prompt ("introduce cadena");
+		// document.write(input);
+		lista = _split(input, lista); // convertimos string a un array. sin espacio 
+		lista = _lowercase(lista); // ponemos todos los elementos del array en minuscula. 
+		// _read(lista);
+
+		document.write('- Número de palabras. ' +  lista.length+'<br>');
+        document.write('- La primera y última palabra del array. '+  lista[0]+'/'+ lista[(lista.length-1)] +'<br>');
+		document.write('- Muestra el array ordenado de la a-z.' + lista.sort()+'<br>');
+		document.write('- Muestra el array ordenado de la z-a. ' + lista.reverse()+'<br>'); 
+		document.write('- Convierte todo el array a mayúsculas: '); _read(lista = _uppercase(lista));
+
+		
+
+		</script> 
+		<!-- fin script en body -->
+	</body>
+</html>

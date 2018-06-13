@@ -1,0 +1,90 @@
+<html>
+<!-- 15.- Crea dos arrays de 10 elementos y rellénalo con valores aleatorios. Luego ordena los dos 
+arrays. Realiza un script que cree un tercer array de 20 elementos con los elementos de los 
+dos arrays anteriores y ordenados (hay que ir creándolo a medida que se lean los arrays, no 
+vale ordenarlo al final de todo)  -->
+
+	<head>
+			<title>EJERCICIO 15 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+	</head>
+			
+
+	<body>
+		<!-- script en body-->
+		<script type="text/javascript" > 
+
+//---------------------------------------------------------
+function _alea(){ // funcion genera numero aleatorio de 1 a 100 
+
+   var valor = Math.floor((Math.random() * 100) + 1);
+   valor = parseInt(valor);
+   return valor;
+}
+
+function _order(lista){
+
+	lista.sort(function(a,b){ 
+			return a - b
+		    //return b - a
+		})
+
+}
+		
+function _init(lista){
+
+	for(var i=0; i<10; i++){
+		lista.push(_alea());
+		_order(lista);
+		
+	}
+}
+
+
+function _concat (lista1, lista2, lista3){
+	lista3 = lista1.concat(lista2);
+	// _order(lista3);
+	// _read(lista3);
+	return lista3;
+	
+}
+
+function _read(lista){
+
+	for (var x=0; x<lista.length;x++){
+		document.write(lista[x]);
+		document.write("<br>"); 	 
+	}
+
+
+}
+
+
+
+// ------------------------------------------------------
+		// declaramos arrays // 
+		var	lista1	=	new	Array(); 
+		var	lista2	=	new	Array();
+		var	lista3	=	new	Array();
+		// !declaramos arrays // 
+		// inicializamos // 
+		_init(lista1);_init(lista2);
+		// !inicializamos // 
+
+
+		 
+		// _read(lista1);
+		// document.write('<br>');
+		//  _read(lista2);
+
+
+		 lista3=_concat(lista1,lista2, lista3); // concatenamos e igualamos con el array. Ojo al return de la funcion ;)
+		//  document.write('<br>');
+		 // alert("leemos"); 
+
+		 _read(lista3); //  document.write(lista3.length);
+
+		</script> 
+		<!-- fin script en body -->
+	</body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+<!-- 19.- Realiza un script para jugar a adivinar números (del 1 al 1000)
+Versión 1 : El usuario piensa un número y el programa intentará adivinarlo. Para ello
+mostrará el número que cree que ha pensado el usuario y el usuario indicará si es mayor o
+menor. El sistema adivinará siempre el número.
+Versión 2 : El sistema piensa un número y el usuario trata de adivinarlo. El usuario
+teclea el número que cree que ha pensado el sistema y el programa contestará si el número
+pensado es mayor o menor que el número indicado.   -->
+
+	<head>
+			<title>EJERCICIO 19 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+	</head>
+			
+
+	<body>
+		<!-- script en body-->
+		<script type="text/javascript" > 
+
+		function _piensanum(a,b){
+			
+			var valor = Math.round(Math.random()*(b-a)+parseInt(a));
+			// Math.floor((Math.random() * max) + min);
+			return valor;
+		}
+
+
+		function _mode1(){
+		
+			do{
+				
+				ask = prompt('el numero es'+num+'?');
+				if (ask=="mayor"){
+					num=_piensanum(max,num);
+				}  
+				if (ask=="menor"){
+					num=_piensanum(num,min);
+				}
+
+				if (ask=="acierto"){
+					acierto=true;
+					alert("genial!!!")
+				}
+			}while (acierto==false);
+		}
+
+
+		function _mode2(){
+		do{
+				
+				ask = prompt('indica num');
+				if (ask>num){
+					alert("menor");
+				}  
+				if (ask<num){
+					alert("mayor");
+				}
+
+				if (ask==num){
+					acierto=true;
+					alert("Acierto!!!")
+				}
+			}while (acierto==false);
+
+
+
+
+		}
+
+
+
+
+/////////////////////////////////////////////////////
+
+		    var acierto=false;
+			var ask;
+			var max =1000;
+			var min =1;
+			var num= _piensanum(max,min);
+
+		var playmode = prompt("elige modo de juego (1 o 2)");
+		playmode = parseInt(playmode);
+		switch (playmode) {
+			case 1: _mode1();
+			break;
+			case 2: _mode2();
+			break;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		</script> 
+		<!-- fin script en body -->
+	</body>
+</html>

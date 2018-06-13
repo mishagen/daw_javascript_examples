@@ -1,0 +1,134 @@
+<html>
+<!-- 18.- Realiza un script que pida un número de filas y columnas y el modelo de tabla 
+deseado(Usando Prompt()). Deberá dibujarse una tabla con unas características distintas 
+según el modelo  : 
+ 
+•  Modelo 1 : Pintar las filas impares con un color distinto. 
+•  Modelo 2 : Pintar las celdas no consecutivas en forma de tablero de ajedrez. 
+No deberán existir dos celdas consecutivas con el mismo color. 
+•  Modelo 3 : Pedir un texto para el encabezado de la tabla y realizar el modelo 1 
+con ese encabezado. 
+•  Modelo 4 : Pedir un texto para el encabezado de la tabla y realizar el modelo 2 
+con ese encabezado. 
+ 
+Nota : En este ejercicio se intentará utilizar el código del modelo 1 y 2 para realizar el 3 y 4. 
+Es decir, el modelo 1 y 3 se realizarán en el mismo código. El modelo 2 y 4 también.   -->
+
+	<head>
+			<title>EJERCICIO 18 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+	</head>
+			
+
+	<body>
+		<!-- script en body-->
+		<script type="text/javascript" > 
+		//-----------------------------------------------------------
+		//  INICIO PROGRAMA
+		//-----------------------------------------------------------
+	
+		function _table1(rol,col, caption){
+
+			
+	 		// encabezado tabla. 
+			document.write ('<table border="1" cellpadding="10">');
+	        if(model == 3 || model ==4){
+	        document.write ('<thead><h2>'+caption+'<h2></thead>');
+			}
+	         for (var rol=1;rol<=lim_row;rol++){ // for para definir filas
+	         document.write ('<tr>');
+
+
+				for ( var col = 1; col <=lim_col; col++) { // for para definir columnas
+					
+						
+						 if (rol%2==0){
+								// alert("pitufamos");
+								document.write ('<td>'+rol+'/'+col+'</td>');
+							} else {
+							 	document.write ('<td bgcolor="grey">'+rol+'/'+col+'</td>');
+							}
+					
+			} document.write('</tr>');
+			}  document.write('</table>');
+
+		}
+
+
+
+		function _table2(rol,col, caption){
+
+				
+			 		// encabezado tabla. 
+					document.write ('<table border="1" cellpadding="10">');
+			        if(model == 3 || model ==4){
+			        document.write ('<thead><h2>'+caption+'<h2></thead>');
+					}
+			         for (var rol=1;rol<=lim_row;rol++){ // for para definir filas
+			         document.write ('<tr>');
+
+
+					for ( var col = 1; col <=lim_col; col++) { // for para definir columnas
+							
+								
+							if (rol%2==0){ // si la fila es par y
+								if(col%2!=0){ //si la columna es impar
+											document.write ('<td>'+rol+'/'+col+'</td>');
+								} else {
+											document.write ('<td bgcolor="grey">'+rol+'/'+col+'</td>');
+										}	
+							} else { // si la fila es impar y
+								if(col%2==0){ // si la columna es par
+											document.write ('<td>'+rol+'/'+col+'</td>');
+								} else {
+											document.write ('<td bgcolor="grey">'+rol+'/'+col+'</td>');
+										}		
+				} 		
+					} document.write('</tr>');
+					}  document.write('</table>');
+		}
+
+
+		function _mode(lim_col,col,model,caption){
+
+
+			switch(model) {
+				case 1:  // Pintar las filas impares con un color distinto. 
+					_table1(lim_col,lim_row,caption);
+				
+				break;
+
+
+				case 2: //  Pintar las celdas no consecutivas en forma de tablero de ajedrez. 
+					_table2(lim_col,lim_row,caption);
+				break;
+				case 3: 
+				caption=prompt ('indica encabezado'); 
+				_table1(lim_col,lim_row,caption);
+				
+
+
+				break;
+				case 4: 
+				caption=prompt ('indica encabezado'); 
+				_table2(lim_col,lim_row,caption);
+				break;
+			}
+		};
+
+
+ 		var lim_col = prompt ('indica columna'); 
+ 		var lim_row = prompt ('indica fila'); 
+ 		var model = prompt ('indica modelo'); 
+ 		var caption;
+ 		
+ 		model =parseInt(model);
+ 		lim_col =parseInt(lim_col);
+ 		lim_row =parseInt(lim_row);
+
+ 		_mode(lim_col,lim_row,model,caption);
+
+		</script> 
+		<!-- fin script en body -->
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<html>
+<!-- 14.- Realiza un script que cargue un array con 30 nombres, los ordene de forma alfabética y 
+luego los distribuya de forma aleatoria en una clase de 6 filas y 5 columnas. 
+Pinta la lista de alumnos en orden alfabético y como quedarían distribuidos los alumnos en 
+clase, simulándolo con una tabla y añadiendo en cada celda el nombre del alumno.  -->
+
+	<head>
+			<title>EJERCICIO 14 JAVASCRIPT BLOQUE 3</title>
+			<meta charset="UTF-8">
+	</head>
+			
+
+	<body>
+		<!-- script en body-->
+		<script type="text/javascript" > 
+
+//---------------------------------------------------------
+
+		function _order(lista){
+			 // var alumnos = input.toUpperCase();
+			lista.sort();
+			// lista.reverse(); 
+			
+		}
+
+
+		function _read(lista){
+
+			for (var x=0; x<lista.length;x++){
+				document.write(lista[x]);
+				document.write("<br>"); 	 
+			}
+		}
+
+
+		function _tabla(lista){
+
+			var lim_col= 5; 
+ 		    var lim_row= 6;
+
+
+ 		  var m=1;
+ 		 // encabezado tabla. 
+		 document.write ('<table border="1" cellpadding="10">');
+         for (var rol=0;rol<=lim_row;rol++){ // for para definir filas
+          document.write ('<tr>');
+
+
+			for ( var col = 0; col <lim_col; col++) { // for para definir columnas
+				
+				if(m<lista.length){
+					 document.write ('<td>'+lista[m]+'</td>');
+					m++;	
+				};
+				
+		}  document.write ('</tr>');
+		}  document.write ('</table>');
+
+		}
+
+
+// ------------------------------------------------------
+
+			
+		var alumnos = [
+				'Maria',
+				'Silvia',
+				'Ruth',
+				'Bernardino',
+				'Raul',
+				'Andrés',
+				'Julio',
+				'Santiago',
+				'Ichi',
+				'Emilio',
+				'Alicia',
+				'Miguel',
+				'Francisco',
+				'Luis',
+				'Andre',
+				'Adriana',
+				'Anxela',
+				'Marta',
+				'Luisa',
+				'Zenaida',
+				'Borja',
+				'Bjorn',
+				'Iki',
+				'Sato',
+				'Pedro',
+				'Pablo',
+				'Sergio',
+				'Anton',
+				'Ruperta',
+				'Antoni',
+				'Rafaela'
+	 		];
+
+	
+		 _order(alumnos);
+		//  _read(alumnos);
+		_tabla(alumnos);
+
+		</script> 
+		<!-- fin script en body -->
+	</body>
+</html>
